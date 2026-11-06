@@ -17,24 +17,24 @@ const arr = value => Array.isArray(value) ? value : [];
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 function dossierMarkup(d) {
-  const cards = (items, kind) => arr(items).map(item => \`<article class="data-card build-piece"><h4>\${esc(item.name)}</h4><p>\${esc(item.detail)}</p>\${kind === 'clue' ? \`<span class="card-status">// \${esc(item.status || 'UNVERIFIED')}</span>\` : kind === 'character' ? \`<span class="card-status">// \${esc(item.role || 'PERSON OF INTEREST')}</span>\` : ''}</article>\`).join('');
-  return \`
+  const cards = (items, kind) => arr(items).map(item => `<article class="data-card build-piece"><h4>${esc(item.name)}</h4><p>${esc(item.detail)}</p>${kind === 'clue' ? `<span class="card-status">// ${esc(item.status || 'UNVERIFIED')}</span>` : kind === 'character' ? `<span class="card-status">// ${esc(item.role || 'PERSON OF INTEREST')}</span>` : ''}</article>`).join('');
+  return `
     <div class="build-console"><div class="console-left"><span class="console-pulse"></span> CONSTRUCTION SEQUENCE <b id="buildPercent">00%</b></div><div class="console-track"><i id="buildTrack"></i></div><div class="console-log" id="buildLog">INITIALISING STORY ARCHITECTURE...</div></div>
-    <div class="dossier-top build-piece"><div><div class="classification">\${esc(d.classification || 'RESTRICTED // FICTIONAL')}</div><h2>\${esc(d.title || 'UNTITLED DOSSIER')}</h2><p class="logline">\${esc(d.logline)}</p></div><div class="stamp">\${esc(d.mode || 'FICTIONAL')}</div></div>
-    <section class="dossier-section build-piece"><h3>01 / INCIDENT SUMMARY</h3><p>\${esc(d.incident)}</p></section>
-    <section class="dossier-section build-piece"><h3>02 / RECOVERED CLUES</h3><div class="data-grid">\${cards(d.clues, 'clue')}</div></section>
-    <section class="dossier-section build-piece"><h3>03 / PERSONS OF INTEREST</h3><div class="data-grid">\${cards(d.characters, 'character')}</div></section>
-    <section class="dossier-section build-piece"><h3>04 / EVENT TIMELINE</h3><div class="timeline">\${arr(d.timeline).map(t => \`<div class="timeline-item build-piece"><time>\${esc(t.time)}</time><p>\${esc(t.event)}</p></div>\`).join('')}</div></section>
-    <section class="dossier-section build-piece"><h3>05 / LOCATIONS OF INTEREST</h3><div class="data-grid">\${cards(d.locations, 'location')}</div></section>
-    <section class="dossier-section build-piece"><h3>06 / HUMAN STAKES</h3><p>\${esc(d.stakes)}</p></section>
-    <section class="dossier-section build-piece"><h3>07 / VISUAL DIRECTION</h3><p>\${esc(d.visualDirection)}</p></section>
-    <section class="dossier-section build-piece"><h3>08 / UNRESOLVED QUESTIONS</h3><ol class="question-list">\${arr(d.openQuestions).map(q => \`<li>\${esc(q)}</li>\`).join('')}</ol></section>
-    <section class="dossier-section build-piece"><h3>09 / NEXT STORY BEAT</h3><div class="next-beat"><p>\${esc(d.nextBeat)}</p></div></section>
-    <div class="dossier-actions build-piece"><button class="small-button" id="copyButton">COPY DOSSIER</button><button class="small-button" id="downloadButton">DOWNLOAD TXT</button></div>\`;
+    <div class="dossier-top build-piece"><div><div class="classification">${esc(d.classification || 'RESTRICTED // FICTIONAL')}</div><h2>${esc(d.title || 'UNTITLED DOSSIER')}</h2><p class="logline">${esc(d.logline)}</p></div><div class="stamp">${esc(d.mode || 'FICTIONAL')}</div></div>
+    <section class="dossier-section build-piece"><h3>01 / INCIDENT SUMMARY</h3><p>${esc(d.incident)}</p></section>
+    <section class="dossier-section build-piece"><h3>02 / RECOVERED CLUES</h3><div class="data-grid">${cards(d.clues, 'clue')}</div></section>
+    <section class="dossier-section build-piece"><h3>03 / PERSONS OF INTEREST</h3><div class="data-grid">${cards(d.characters, 'character')}</div></section>
+    <section class="dossier-section build-piece"><h3>04 / EVENT TIMELINE</h3><div class="timeline">${arr(d.timeline).map(t => `<div class="timeline-item build-piece"><time>${esc(t.time)}</time><p>${esc(t.event)}</p></div>`).join('')}</div></section>
+    <section class="dossier-section build-piece"><h3>05 / LOCATIONS OF INTEREST</h3><div class="data-grid">${cards(d.locations, 'location')}</div></section>
+    <section class="dossier-section build-piece"><h3>06 / HUMAN STAKES</h3><p>${esc(d.stakes)}</p></section>
+    <section class="dossier-section build-piece"><h3>07 / VISUAL DIRECTION</h3><p>${esc(d.visualDirection)}</p></section>
+    <section class="dossier-section build-piece"><h3>08 / UNRESOLVED QUESTIONS</h3><ol class="question-list">${arr(d.openQuestions).map(q => `<li>${esc(q)}</li>`).join('')}</ol></section>
+    <section class="dossier-section build-piece"><h3>09 / NEXT STORY BEAT</h3><div class="next-beat"><p>${esc(d.nextBeat)}</p></div></section>
+    <div class="dossier-actions build-piece"><button class="small-button" id="copyButton">COPY DOSSIER</button><button class="small-button" id="downloadButton">DOWNLOAD TXT</button></div>`;
 }
 
 function dossierText(d) {
-  return \`\${d.title}\\n\${d.classification}\\n\\nLOGLINE\\n\${d.logline}\\n\\nINCIDENT\\n\${d.incident}\\n\\nCLUES\\n\${arr(d.clues).map(x => \`- \${x.name}: \${x.detail} [\${x.status || ''}]\`).join('\\n')}\\n\\nCHARACTERS\\n\${arr(d.characters).map(x => \`- \${x.name} (\${x.role}): \${x.detail}\`).join('\\n')}\\n\\nTIMELINE\\n\${arr(d.timeline).map(x => \`- \${x.time}: \${x.event}\`).join('\\n')}\\n\\nLOCATIONS\\n\${arr(d.locations).map(x => \`- \${x.name}: \${x.detail}\`).join('\\n')}\\n\\nSTAKES\\n\${d.stakes}\\n\\nVISUAL DIRECTION\\n\${d.visualDirection}\\n\\nOPEN QUESTIONS\\n\${arr(d.openQuestions).map(x => \`- \${x}\`).join('\\n')}\\n\\nNEXT STORY BEAT\\n\${d.nextBeat}\\n\`;
+  return `${d.title}\\n${d.classification}\\n\\nLOGLINE\\n${d.logline}\\n\\nINCIDENT\\n${d.incident}\\n\\nCLUES\\n${arr(d.clues).map(x => `- ${x.name}: ${x.detail} [${x.status || ''}]`).join('\\n')}\\n\\nCHARACTERS\\n${arr(d.characters).map(x => `- ${x.name} (${x.role}): ${x.detail}`).join('\\n')}\\n\\nTIMELINE\\n${arr(d.timeline).map(x => `- ${x.time}: ${x.event}`).join('\\n')}\\n\\nLOCATIONS\\n${arr(d.locations).map(x => `- ${x.name}: ${x.detail}`).join('\\n')}\\n\\nSTAKES\\n${d.stakes}\\n\\nVISUAL DIRECTION\\n${d.visualDirection}\\n\\nOPEN QUESTIONS\\n${arr(d.openQuestions).map(x => `- ${x}`).join('\\n')}\\n\\nNEXT STORY BEAT\\n${d.nextBeat}\\n`;
 }
 async function copyDossier(d) {
   try { await navigator.clipboard.writeText(dossierText(d)); document.getElementById('copyButton').textContent = 'COPIED'; }
@@ -43,7 +43,7 @@ async function copyDossier(d) {
 function downloadDossier(d) {
   const blob = new Blob([dossierText(d)], {type:'text/plain'});
   const url = URL.createObjectURL(blob); const a = document.createElement('a');
-  a.href = url; a.download = \`\${(d.title || 'blacksite-dossier').toLowerCase().replace(/[^a-z0-9]+/g,'-')}.txt\`;
+  a.href = url; a.download = `${(d.title || 'blacksite-dossier').toLowerCase().replace(/[^a-z0-9]+/g,'-')}.txt`;
   a.click(); URL.revokeObjectURL(url);
 }
 
