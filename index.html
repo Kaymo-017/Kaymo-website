@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10130f"><title>BLACKSITE // Intelligence Division</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="noise"></div><div class="scanline"></div>
+  <header class="topbar"><a class="brand" href="#top"><span class="brand-mark">B</span><span>BLACKSITE<small>INTELLIGENCE DIVISION</small></span></a><div class="top-right"><span class="live-dot"></span><span id="modeLabel">CONNECTING</span><span class="top-separator">/</span><span>SECURE CHANNEL 07</span></div></header>
+  <main id="top">
+    <section class="hero"><div class="eyebrow"><span class="eyebrow-line"></span> FICTIONAL INTELLIGENCE SYSTEM <span class="eyebrow-line"></span></div><h1>THE TRUTH IS<br><em>NEVER</em> ON RECORD.</h1><p class="hero-copy">Every operation begins with a question. Build the mystery before the world knows there's a story.</p><div class="hero-meta"><span>SYS. VERSION 01.06</span><span>CLASSIFICATION: FICTIONAL</span><span>STATUS: <b>AWAITING INPUT</b></span></div></section>
+    <section class="workspace">
+      <aside class="control-panel"><div class="panel-heading"><span class="section-index">01</span><div><h2>MISSION PARAMETERS</h2><p>DEFINE THE UNKNOWN</p></div><span class="corner-mark">+</span></div>
+        <form id="generatorForm">
+          <label for="genre">STORY CLASSIFICATION</label><select id="genre"><option>Mystery thriller</option><option>Military conspiracy</option><option>Espionage mystery</option><option>Psychological action thriller</option><option>Science-fiction suspense</option></select>
+          <label for="setting">PRIMARY LOCATION</label><input id="setting" maxlength="100" placeholder="e.g. abandoned desert listening station" value="Remote communications facility">
+          <label for="tone">ATMOSPHERE</label><select id="tone"><option>Dark, tense and cinematic</option><option>Cold, procedural and mysterious</option><option>Paranoid and unsettling</option><option>Gritty, grounded and emotional</option><option>High-stakes and suspenseful</option></select>
+          <label for="incident">INITIAL ANOMALY <span class="optional">OPTIONAL</span></label><textarea id="incident" rows="4" maxlength="500" placeholder="What strange event starts the story?">A missing operative's radio signal suddenly returns after six months of silence.</textarea>
+          <label for="extra">ADDITIONAL INTELLIGENCE <span class="optional">OPTIONAL</span></label><input id="extra" maxlength="500" placeholder="Any names, twists or details to include...">
+          <button class="build-button" id="buildButton" type="submit"><span>◈</span> INITIATE DOSSIER BUILD <b>↗</b></button>
+          <p class="form-note">GENERATES A NEW FICTIONAL STORY WORLD</p>
+        </form>
+      </aside>
+      <section class="output-panel" aria-live="polite"><div class="panel-heading output-heading"><span class="section-index">02</span><div><h2>INTELLIGENCE FEED</h2><p>LIVE DOSSIER CONSTRUCTION</p></div><span class="feed-status"><i></i> <span id="feedStatus">STANDBY</span></span></div>
+        <div id="emptyState" class="empty-state"><div class="radar"><span></span><span></span><span></span><b>?</b></div><h3>NO ACTIVE DOSSIER</h3><p>Set your parameters and initiate the build sequence. The system will assemble a new fictional intelligence file.</p><div class="empty-code">AWAITING AUTHORIZED INPUT <span>_</span></div></div>
+        <div id="loadingState" class="loading-state hidden"><div class="loader-ring"></div><h3 id="loadingTitle">ANALYSING SIGNALS</h3><p id="loadingSub">Cross-referencing available intelligence...</p><div class="progress-track"><span id="progressBar"></span></div><div class="progress-meta"><span>CONSTRUCTING DOSSIER</span><span id="progressPercent">00%</span></div></div>
+        <div id="dossier" class="dossier hidden"></div>
+      </section>
+    </section>
+    <footer><span>BLACKSITE © 2026 // FICTIONAL STORY ENGINE</span><span>NO REAL-WORLD INTELLIGENCE IS USED OR GENERATED</span><span>BUILT FOR THE UNKNOWN <b>◆</b></span></footer>
+  </main>
+  <script src="/app.js"></script>
+</body></html>
